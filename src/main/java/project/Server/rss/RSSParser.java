@@ -5,24 +5,25 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.syndication.feed.synd.*;
-import com.sun.syndication.io.*;
-import com.sun.syndication.io.XmlReader;
+import project.Server.domain.dto.RSSFeedDto;
 
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 
 public class RSSParser {
-	public static boolean ReadRSSFeed(URL url) throws Exception {
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+	public static List<RSSFeedDto> ReadRSSFeed(URL url){
+		
+		List<RSSFeedDto> output = new ArrayList<>();
 		try{
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc= dBuilder.parse(url.openConnection().getInputStream());
 			NodeList items = doc.getDocumentElement().getElementsByTagName("channel");
 			if(items.getLength() == 0)
-				return false;
+				return null;
 			Element channel = (Element) items.item(0);
 			items = channel.getElementsByTagName("item");
 			for(int i = 0; i < items.getLength(); i++) {
@@ -57,13 +58,16 @@ public class RSSParser {
 				System.out.println("img: " + img);
 				System.out.println("Link: " + link);
 				System.out.println();
+				
+				RSSFeedDto token = new RSSFeedDto(title, description, date, img, link);
+				output.add(token);
 			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
-		return true;
+		return output;
 	}
 	
 }
