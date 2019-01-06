@@ -1,5 +1,9 @@
 package project.Server.domain.dto;
 
+/**
+ * DTO containing information about RSS feed item
+ * @author Matt
+ */
 public class RSSFeedDto {
 	private String title;
 	private String description;

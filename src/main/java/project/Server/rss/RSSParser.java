@@ -13,7 +13,16 @@ import project.Server.domain.dto.RSSFeedDto;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 
+/**
+ * A class responsible for parsing through RSS feed.
+ * @author Matt
+ */
 public class RSSParser {
+	/**
+	 * Reads RSS feed from provided URL, returning processed list of items, packed into aan item list
+	 * @param url - URL to the RSS feed.
+	 * @return List of objects representing RSS feed items, of type RSSFeedDto. If reading the feed failed, returns null.
+	 */
 	public static List<RSSFeedDto> ReadRSSFeed(URL url){
 		
 		List<RSSFeedDto> output = new ArrayList<>();

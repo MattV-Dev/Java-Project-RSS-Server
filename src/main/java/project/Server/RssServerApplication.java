@@ -6,10 +6,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import project.Server.rss.*;
 
+/**
+ * Application class for the server
+ * @author Matt
+ */
 @SpringBootApplication
 public class RssServerApplication {
 
-	public static void main(String[] args) throws Exception {
+	/**
+	 * Main function of the application
+	 * @param args - Arguments passed through console.
+	 */
+	public static void main(String[] args) {
 		SpringApplication.run(RssServerApplication.class, args);
 	}
 
